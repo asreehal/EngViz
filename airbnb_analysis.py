@@ -196,3 +196,37 @@ ax6.text(0.02, 0.98, kpi_text, transform=ax6.transAxes, fontsize=13,
 plt.savefig('/home/claude/airbnb_dashboard.png', dpi=150, bbox_inches='tight')
 plt.close()
 print("Combined dashboard saved -> airbnb_dashboard.png")
+# ============================================
+# QUESTION 3:
+# What is the correlation between minimum nights
+# and listing availability?
+# ============================================
+
+# Calculate Pearson correlation
+correlation = df['minimum_nights'].corr(df['availability_365'])
+
+print("Correlation between Minimum Nights and Availability:")
+print(round(correlation, 3))
+
+
+# Visualize the relationship
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(10, 6))
+
+plt.scatter(
+    df['minimum_nights'],
+    df['availability_365'],
+    alpha=0.3
+)
+
+plt.xlabel('Minimum Nights')
+plt.ylabel('Availability (days out of 365)')
+plt.title(
+    f'Minimum Nights vs. Listing Availability\n'
+    f'Correlation = {correlation:.3f}'
+)
+
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
